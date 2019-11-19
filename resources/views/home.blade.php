@@ -19,7 +19,7 @@
 
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Panel administrativo - Usuario.</div>
+                <div class="card-header">Panel administrativo - <strong>{{ Auth::user()->name }}</strong></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -30,6 +30,12 @@
                             </button>
                             {{ session('status') }}
                         </div>
+                    @endif
+
+                    @if (Auth::user()->previous_logged_at)
+                        Accediste por última vez <i>{{ Carbon\Carbon::parse(Auth::user()->previous_logged_at)->diffForHumans() }}</i>
+                    @else
+                        Bienvenido(a): Es la primera vez que accedes a nuestro sistema.
                     @endif
 
                     <ul>
